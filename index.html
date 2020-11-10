@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spelling Champion</title>
+
+    <!-- links -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="./styles/css/styles.css">
+</head>
+
+<body>
+    <!-- main start -->
+    <main>
+        <div class="wrapper">
+            <!-- section-1 start -->
+            <section class="form-1-container">
+                <!-- form-1 start -->
+                <form name="form-1"action="#">
+                    <div class="word-container">
+                        <label for="user-word">Enter word #<span class="word-count"></span>:</label>
+                        <input type="text" name="user-word" id="user-word" placeholder="Enter word here">
+                    </div>           
+                    <div>
+                        <div class="buttons-container">
+                            <button type="button" class="add-word">Add word</button>
+                            <button type="button" class="letsPlay">Let's Play!</button>
+                        </div>
+                    </div>
+                </form>
+                <!-- form-1 end -->
+            </section>
+            <!-- section-1 end -->
+
+            <!-- section-2 start -->
+            <section class="form-2-container">
+                <div class="result-container">
+                    <p class="result">Result: <span>6/6</span></p>
+                    <p class="result-percentage">100%</p>
+                </div>
+                <!-- form-2 start -->
+                <form name="form-2" action="#">
+                    <ul id="scrabledWords">
+                        <li class="word-container">
+                            <label for="word-1">ljndsfljn</label>
+                            <input type="text" placeholder="spell your word">
+                        </li>
+                    </ul>
+                    <div class="buttons-container">
+                        <button type="submit">Submit your answers</button>
+                        <button type="button">Play again!</button>
+                    </div>
+                </form>
+                <!-- form-2 end -->
+            </section>
+            <!-- section-2 end -->
+        </div>
+    </main>
+    <!-- main end -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./scripts/app.js"></script>
+</body>
+</html>

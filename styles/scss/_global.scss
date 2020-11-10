@@ -1,0 +1,69 @@
+
+/* My styles here */
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-size: 1.6rem;
+    font-family: 'Lato', sans-serif;
+}
+
+ul{
+    padding: 0;
+    list-style: none;
+}
+
+form{
+    border: 1px solid lightgray;
+    padding: 20px;
+}
+
+label, input{
+    padding: 10px;
+}
+
+.word-count{
+    font-weight: 700;
+}
+
+label{
+    flex: 1 2 20%;
+    align-self: center;
+    padding-left: 2px;
+}
+
+input{
+    flex: 1 1 70%;
+    margin: 10px 0;
+    box-shadow: 2px 4px 3px gray;
+}
+
+.wrapper{
+    width: 95%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.word-container{
+    display: flex;
+}
+
+.buttons-container, .result-container {
+    display: flex;
+}
+
+.buttons-container button{
+    flex: 1;
+    padding: 5px;
+}
+
+// form-2-container
+.result-container{
+    justify-content: space-between;
+}
+
+.form-2-container{
+    display: none;
+}
