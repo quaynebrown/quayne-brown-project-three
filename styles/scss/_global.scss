@@ -94,6 +94,13 @@ button{
 // form-2-container
 .result-container{
     justify-content: space-between;
+    background: $light-color;
+    font-weight: 700;
+    font-size: 2rem;
+    padding: 0 20px;
+    margin-bottom: 10px;
+    border-radius: 50px;
+    border: 4px solid $primary-accent
 }
 
 .hide-section{
@@ -104,6 +111,14 @@ button{
 .show-section{
     visibility: visible;
     height: auto;
+}
+
+.correctAnswer{
+    background-color: yellowgreen;
+}
+
+.wrongAnswer{
+    background-color: pink;
 }
 
 // "words-container styles

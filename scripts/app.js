@@ -38,6 +38,7 @@ const spellingApp = {};
 spellingApp.words = [];
 spellingApp.scrambledWords = [];
 
+
 // take a word and shuffles the characters
 spellingApp.shuffleLetters =  (word) => {
     let wordLength = word.length;
@@ -66,12 +67,43 @@ spellingApp.generateListItems = (word, index) => {
     const listItem = `
         <li class="word-container input-container">
             <label for="shuffle-${index}">${word}</label>
-            <input type="text" id="shuffle-${index}" placeholder="spell your word">
+            <input type="text" class="unscrambled-word" id="shuffle-${index}" placeholder="spell your word">
         </li>
     `
 
     $('#scrambledWords').append(listItem);
 }
+
+// calculate and return the percentage of correct answers
+spellingApp.calculatePercentage = (correctAnswers) => {
+    return ((correctAnswers / spellingApp.words.length) * 100);
+}
+
+// Add event listener for when the user click 'Submit your answers'
+$('#form-2').on('submit', function(e){
+    e.preventDefault();
+    let correctAnswersCount = 0;
+
+    $('.unscrambled-word').each(function (){
+        const unscrambledWord = $(this).val().toLowerCase();
+
+        // compare the user's input with the words that are in the original array
+        if (spellingApp.words.includes(unscrambledWord)){
+            // Calculate how much they got right
+            correctAnswersCount++;
+            // add a class to identify that the answer is correct
+            $(this).addClass('correctAnswer');
+        }else{
+            // add a class to identify that the answer is incorrect
+            $(this).addClass('wrongAnswer');
+        }
+    });
+
+    // display result
+    $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`)
+
+    $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount))
+})
 
 // 2. Add event listener for when the user click 'Submit & Play!'
 $('.letsPlay').on('click', function(e){
