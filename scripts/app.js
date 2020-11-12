@@ -38,7 +38,7 @@
     
 const spellingApp = {};
 spellingApp.words = [];
-
+spellingApp.scrambledWords = [];
 
 // take a word and shuffles the characters
 spellingApp.shuffleLetters =  (word) => {
@@ -56,58 +56,62 @@ spellingApp.shuffleLetters =  (word) => {
     }
 
     // call back the function if the word did not scramble
-    if(spellingApp.words.includes(scrambledWord)){
+    if(word === scrambledWord){
         spellingApp.shuffleLetters(scrambledWord);
     }
     console.log(scrambledWord)
     return scrambledWord;
 }
 
-
-//get the amount of <li>'s currently on the page
-spellingApp.getAmountOfLi = function() {
-    spellingApp.listCount = spellingApp.listCount ? $('li').length + 1 : 0;
-    console.log(spellingApp.listCount)
-}
-
-
 // 2. Add event listener for when the user click 'Submit & Play!'
 $('.letsPlay').on('click', function(e){
     e.preventDefault();
     // scramble the words and store in a new array
-    
-    // Take the user to a new page to unscramble the words
+    spellingApp.words.forEach((word) => {
+        spellingApp.scrambledWords.push(spellingApp.shuffleLetters(word));
+    })
 
+    // Take the user to a new page to unscramble the words
+    $('#form-1-container').addClass('hide-section');
+    $('#form-2-container').addClass('show-section');
     // generate a list of inputs for the user to unscramble their words
 });
     
-    
+// caching selectors   
 const $userInput = $('#user-word');
 const $wordCount = $('.word-count');
+const $wordIndex = $('.word-index')
 // 1. Add event listener for when the user click 'add word'
 $('.add-word').on('click', function(e){
     e.preventDefault();
     const word = $userInput.val();
     // push each word to a words array
-    spellingApp.words.push(word);
+    spellingApp.words.push(word.toLowerCase());
+
+    const newWord = `
+    <li>
+        <p>${word}</p> 
+        <i class="fas fa-minus-circle"></i>
+    </li>`;
+
+    // print a list of all the words entered
+    $('.words').append(newWord);
 
     // clear the input field and add focus
     $userInput.val('');
     $userInput.focus();
-    spellingApp.getWordCount();
+    $('.letsPlay').attr('disabled', false);
+    spellingApp.setWordCount();
 });
-    // display the words on the screen for the user to see
-    // display the total number of words entered
 
-// get word count plus 1
-spellingApp.getWordCount = () => {
+// set word count on the page
+spellingApp.setWordCount = () => {
     $wordCount.text(spellingApp.words.length + 1);
+    $wordIndex.text(spellingApp.words.length);
 }
-
-
-
+// initializing app
 spellingApp.init = function (){
-    spellingApp.getWordCount();
+    spellingApp.setWordCount() ;
     $('.letsPlay').attr('disabled', true);
 }
 

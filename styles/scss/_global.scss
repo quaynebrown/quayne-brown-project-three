@@ -62,11 +62,13 @@ input{
 
 input,
 button{
+    border: none;
     box-shadow: 2px 2px 2px $primary-accent;
 }
 
 button{
     background-color: $secondary-color;
+    color: $light-color;
     padding: 10px;
     margin-top: 10px;
     flex: 1 0 100%
@@ -94,8 +96,14 @@ button{
     justify-content: space-between;
 }
 
-.form-2-container{
-    // display: none;
+.hide-section{
+    visibility: hidden;
+    height: 0;
+}
+
+.show-section{
+    visibility: visible;
+    height: auto;
 }
 
 // "words-container styles
@@ -116,6 +124,7 @@ button{
             width: 40px;
             height: 40px;
             background-color: $secondary-color;
+            color: $light-color;
             border-radius: 50%;
             border: 2px solid $primary-accent;
             text-align: center;
@@ -150,4 +159,11 @@ button{
         margin-right: 20px;
     }
 
+}
+
+@media (min-width: 620px){
+    button:hover,
+    button:focus{
+        background-color: $primary-accent;
+    }
 }

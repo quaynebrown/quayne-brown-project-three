@@ -194,7 +194,7 @@ ul {
 form {
   border: 4px solid #f96900;
   padding: 20px;
-  background-color: #ffdd76;
+  background-color: #f8c4ff;
   font-size: 2rem;
 }
 
@@ -233,12 +233,14 @@ input {
 
 input,
 button {
+  border: none;
   -webkit-box-shadow: 2px 2px 2px #f96900;
           box-shadow: 2px 2px 2px #f96900;
 }
 
 button {
-  background-color: #2aaf2a;
+  background-color: #630070;
+  color: #F5F5F5;
   padding: 10px;
   margin-top: 10px;
   -webkit-box-flex: 1;
@@ -275,9 +277,19 @@ button {
           justify-content: space-between;
 }
 
+.hide-section {
+  visibility: hidden;
+  height: 0;
+}
+
+.show-section {
+  visibility: visible;
+  height: auto;
+}
+
 .words-container {
   border: 4px solid #f96900;
-  background-color: #ffdd76;
+  background-color: #f8c4ff;
   margin-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -299,7 +311,8 @@ button {
 .words-container .word-count-container p {
   width: 40px;
   height: 40px;
-  background-color: #2aaf2a;
+  background-color: #630070;
+  color: #F5F5F5;
   border-radius: 50%;
   border: 2px solid #f96900;
   text-align: center;
@@ -338,4 +351,11 @@ button {
   border: 2px solid #F5F5F5;
   border-radius: 50%;
   margin-right: 20px;
+}
+
+@media (min-width: 620px) {
+  button:hover,
+  button:focus {
+    background-color: #f96900;
+  }
 }
