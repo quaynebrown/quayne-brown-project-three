@@ -33,9 +33,7 @@
     // calculate the percentage
     // display result
         
-    
-    
-    
+
 const spellingApp = {};
 spellingApp.words = [];
 spellingApp.scrambledWords = [];
@@ -59,8 +57,20 @@ spellingApp.shuffleLetters =  (word) => {
     if(word === scrambledWord){
         spellingApp.shuffleLetters(scrambledWord);
     }
-    console.log(scrambledWord)
+
     return scrambledWord;
+}
+
+// generate a list of scrambled words for the user to spell
+spellingApp.generateListItems = (word, index) => {
+    const listItem = `
+        <li class="word-container input-container">
+            <label for="shuffle-${index}">${word}</label>
+            <input type="text" id="shuffle-${index}" placeholder="spell your word">
+        </li>
+    `
+
+    $('#scrambledWords').append(listItem);
 }
 
 // 2. Add event listener for when the user click 'Submit & Play!'
@@ -69,12 +79,17 @@ $('.letsPlay').on('click', function(e){
     // scramble the words and store in a new array
     spellingApp.words.forEach((word) => {
         spellingApp.scrambledWords.push(spellingApp.shuffleLetters(word));
-    })
+    });
 
     // Take the user to a new page to unscramble the words
     $('#form-1-container').addClass('hide-section');
     $('#form-2-container').addClass('show-section');
-    // generate a list of inputs for the user to unscramble their words
+    
+
+    spellingApp.scrambledWords.forEach((word, index) => {
+        spellingApp.generateListItems(word, index);
+    })
+
 });
     
 // caching selectors   
@@ -109,6 +124,7 @@ spellingApp.setWordCount = () => {
     $wordCount.text(spellingApp.words.length + 1);
     $wordIndex.text(spellingApp.words.length);
 }
+
 // initializing app
 spellingApp.init = function (){
     spellingApp.setWordCount() ;
@@ -118,7 +134,6 @@ spellingApp.init = function (){
 // wait for DOM to be ready
 $(() => {
     spellingApp.init();
-    console.log('ready');
 })
 
 //TODO: create a json file that stores the predefined words and have the ability to add new words from the user input
