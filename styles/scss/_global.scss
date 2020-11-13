@@ -73,6 +73,14 @@ button{
     margin-top: 10px;
     flex: 1 0 100%
 }
+.err-container{
+    display: flex;
+    justify-content: center;
+    color: $err;
+    p{
+        margin:0;
+    }
+}
 
 .wrapper{
     width: 95%;
@@ -83,7 +91,7 @@ button{
 .input-container{
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 }
 
 .buttons-container, .result-container {
@@ -118,7 +126,15 @@ button{
 }
 
 .wrongAnswer{
-    background-color: pink;
+    background-color: $err;
+}
+
+.disable{
+    background-color: $primary-color;
+}
+
+.disable:hover{
+    background-color: inherit;
 }
 
 // "words-container styles

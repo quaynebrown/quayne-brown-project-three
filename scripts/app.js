@@ -38,7 +38,6 @@ const spellingApp = {};
 spellingApp.words = [];
 spellingApp.scrambledWords = [];
 
-
 // take a word and shuffles the characters
 spellingApp.shuffleLetters =  (word) => {
     let wordLength = word.length;
@@ -76,8 +75,24 @@ spellingApp.generateListItems = (word, index) => {
 
 // calculate and return the percentage of correct answers
 spellingApp.calculatePercentage = (correctAnswers) => {
-    return ((correctAnswers / spellingApp.words.length) * 100);
+    const result = (correctAnswers / spellingApp.words.length) * 100;
+    return result.toFixed(2);
 }
+
+// play again
+$('#play-again').on('click', function() {
+    $('#answer-submit').attr('disabled', false).removeClass('disable');
+    // clear all input field
+    $('.unscrambled-word').each(function (){
+        const unscrambledWord = $(this).val('');
+
+        $(this).removeClass('wrongAnswer correctAnswer');
+
+    });
+    //remove class from all input
+
+    //reset calculation
+})
 
 // Add event listener for when the user click 'Submit your answers'
 $('#form-2').on('submit', function(e){
@@ -92,17 +107,18 @@ $('#form-2').on('submit', function(e){
             // Calculate how much they got right
             correctAnswersCount++;
             // add a class to identify that the answer is correct
-            $(this).addClass('correctAnswer');
+            $(this).addClass('correctAnswer').removeClass('wrongAnswer');
         }else{
             // add a class to identify that the answer is incorrect
-            $(this).addClass('wrongAnswer');
+            $(this).addClass('wrongAnswer').removeClass('correctAnswer');
         }
     });
 
+    $('#answer-submit').attr('disabled', true).addClass('disable');
+
     // display result
     $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`)
-
-    $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount))
+    $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount) +'%')
 })
 
 // 2. Add event listener for when the user click 'Submit & Play!'
@@ -110,6 +126,7 @@ $('.letsPlay').on('click', function(e){
     e.preventDefault();
     // scramble the words and store in a new array
     spellingApp.words.forEach((word) => {
+        // let scrambledWord = spellingApp.shuffleLetters(word)
         spellingApp.scrambledWords.push(spellingApp.shuffleLetters(word));
     });
 
@@ -131,24 +148,32 @@ const $wordIndex = $('.word-index')
 // 1. Add event listener for when the user click 'add word'
 $('.add-word').on('click', function(e){
     e.preventDefault();
+    $('.err-container').empty();
+
     const word = $userInput.val();
-    // push each word to a words array
-    spellingApp.words.push(word.toLowerCase());
+    if(word !== ''){
+        // push each word to a words array
+        spellingApp.words.push(word.toLowerCase());
+    
+        const newWord = `
+        <li>
+            <p>${word}</p> 
+            <i class="fas fa-minus-circle"></i>
+        </li>`;
+    
+        // print a list of all the words entered
+        $('.words').append(newWord);
+    
+        // clear the input field and add focus
+        $userInput.val('');
+        $userInput.focus();
+        $('.letsPlay').attr('disabled', false).removeClass('disable');
+        spellingApp.setWordCount();
 
-    const newWord = `
-    <li>
-        <p>${word}</p> 
-        <i class="fas fa-minus-circle"></i>
-    </li>`;
-
-    // print a list of all the words entered
-    $('.words').append(newWord);
-
-    // clear the input field and add focus
-    $userInput.val('');
-    $userInput.focus();
-    $('.letsPlay').attr('disabled', false);
-    spellingApp.setWordCount();
+    }else{
+        // alert('You did not enter a word!');
+        $('.err-container').html('<p>You did not enter a word!</p>')
+    }
 });
 
 // set word count on the page
@@ -160,7 +185,12 @@ spellingApp.setWordCount = () => {
 // initializing app
 spellingApp.init = function (){
     spellingApp.setWordCount() ;
-    $('.letsPlay').attr('disabled', true);
+    $('.letsPlay').attr('disabled', true).addClass('disable');
+    // $('.letsPlay').hover(function(){
+    //     $(this).css('background-color', '#f8c4ff');
+    // }, function(){
+    //     $(this).css('background-color', '#f8c4ff');
+    // });
 }
 
 // wait for DOM to be ready

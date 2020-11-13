@@ -248,6 +248,20 @@ button {
           flex: 1 0 100%;
 }
 
+.err-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  color: #e20000;
+}
+
+.err-container p {
+  margin: 0;
+}
+
 .wrapper {
   width: 95%;
   max-width: 700px;
@@ -260,7 +274,6 @@ button {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  margin-bottom: 20px;
 }
 
 .buttons-container, .result-container {
@@ -299,7 +312,15 @@ button {
 }
 
 .wrongAnswer {
-  background-color: pink;
+  background-color: #e20000;
+}
+
+.disable {
+  background-color: #f8c4ff;
+}
+
+.disable:hover {
+  background-color: inherit;
 }
 
 .words-container {
