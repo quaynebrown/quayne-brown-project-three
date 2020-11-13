@@ -98,20 +98,24 @@ $('#play-again').on('click', function() {
 $('#form-2').on('submit', function(e){
     e.preventDefault();
     let correctAnswersCount = 0;
+    let index = 0;
 
     $('.unscrambled-word').each(function (){
         const unscrambledWord = $(this).val().toLowerCase();
 
         // compare the user's input with the words that are in the original array
-        if (spellingApp.words.includes(unscrambledWord)){
+        if (spellingApp.scrambledWords[index].userWord == unscrambledWord){
             // Calculate how much they got right
             correctAnswersCount++;
             // add a class to identify that the answer is correct
             $(this).addClass('correctAnswer').removeClass('wrongAnswer');
+
         }else{
             // add a class to identify that the answer is incorrect
             $(this).addClass('wrongAnswer').removeClass('correctAnswer');
         }
+
+        index++;
     });
 
     $('#answer-submit').attr('disabled', true).addClass('disable');
@@ -126,8 +130,12 @@ $('.letsPlay').on('click', function(e){
     e.preventDefault();
     // scramble the words and store in a new array
     spellingApp.words.forEach((word) => {
-        // let scrambledWord = spellingApp.shuffleLetters(word)
-        spellingApp.scrambledWords.push(spellingApp.shuffleLetters(word));
+        let scrambledWord = spellingApp.shuffleLetters(word)
+
+        spellingApp.scrambledWords.push({
+            scrambledWord: scrambledWord,
+            userWord: word,
+        });
     });
 
     // Take the user to a new page to unscramble the words
@@ -135,8 +143,8 @@ $('.letsPlay').on('click', function(e){
     $('#form-2-container').addClass('show-section');
     
 
-    spellingApp.scrambledWords.forEach((word, index) => {
-        spellingApp.generateListItems(word, index);
+    spellingApp.scrambledWords.forEach((wordSet, index) => {
+        spellingApp.generateListItems(wordSet.scrambledWord, index);
     })
 
 });
