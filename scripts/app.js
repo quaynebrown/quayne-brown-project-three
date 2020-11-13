@@ -66,7 +66,7 @@ spellingApp.generateListItems = (word, index) => {
     const listItem = `
         <li class="word-container input-container">
             <label for="shuffle-${index}">${word}</label>
-            <input type="text" class="unscrambled-word" id="shuffle-${index}" placeholder="spell your word">
+            <input type="text" autocomplete="off" class="unscrambled-word" id="shuffle-${index}" placeholder="spell your word">
         </li>
     `
 
@@ -79,6 +79,24 @@ spellingApp.calculatePercentage = (correctAnswers) => {
     return result.toFixed(2);
 }
 
+spellingApp.resetGame = () => {
+    spellingApp.words = [];
+    spellingApp.scrambledWords = [];
+
+}
+
+// spellingApp.displayResult(){
+//     // display result
+//     $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`);
+//     $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount) +'%');
+// }
+
+// new game
+$('#new-game').on('click', function() {
+    spellingApp.resetGame();
+    spellingApp.init();
+})
+
 // play again
 $('#play-again').on('click', function() {
     $('#answer-submit').attr('disabled', false).removeClass('disable');
@@ -86,12 +104,16 @@ $('#play-again').on('click', function() {
     $('.unscrambled-word').each(function (){
         const unscrambledWord = $(this).val('');
 
-        $(this).removeClass('wrongAnswer correctAnswer');
+        //remove class from all input
+        $(this).removeClass('wrongAnswer correctAnswer').attr('disabled', false);
 
     });
-    //remove class from all input
+
+    $('#play-again').attr('disabled', true).addClass('disable');
 
     //reset calculation
+    $('.result span').text(`0/${spellingApp.words.length}`)
+    $('.result-percentage span').text('0.00%')
 })
 
 // Add event listener for when the user click 'Submit your answers'
@@ -103,6 +125,7 @@ $('#form-2').on('submit', function(e){
     $('.unscrambled-word').each(function (){
         const unscrambledWord = $(this).val().toLowerCase();
 
+        $(this).attr('disabled', true);
         // compare the user's input with the words that are in the original array
         if (spellingApp.scrambledWords[index].userWord == unscrambledWord){
             // Calculate how much they got right
@@ -119,10 +142,11 @@ $('#form-2').on('submit', function(e){
     });
 
     $('#answer-submit').attr('disabled', true).addClass('disable');
+    $('#play-again').attr('disabled', false).removeClass('disable');
 
     // display result
-    $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`)
-    $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount) +'%')
+    $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`);
+    $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount) +'%');
 })
 
 // 2. Add event listener for when the user click 'Submit & Play!'
@@ -154,7 +178,7 @@ const $userInput = $('#user-word');
 const $wordCount = $('.word-count');
 const $wordIndex = $('.word-index')
 // 1. Add event listener for when the user click 'add word'
-$('.add-word').on('click', function(e){
+$('#form-1').on('submit', function(e){
     e.preventDefault();
     $('.err-container').empty();
 
@@ -179,6 +203,7 @@ $('.add-word').on('click', function(e){
         spellingApp.setWordCount();
 
     }else{
+        // this block should never run
         // alert('You did not enter a word!');
         $('.err-container').html('<p>You did not enter a word!</p>')
     }
@@ -193,12 +218,7 @@ spellingApp.setWordCount = () => {
 // initializing app
 spellingApp.init = function (){
     spellingApp.setWordCount() ;
-    $('.letsPlay').attr('disabled', true).addClass('disable');
-    // $('.letsPlay').hover(function(){
-    //     $(this).css('background-color', '#f8c4ff');
-    // }, function(){
-    //     $(this).css('background-color', '#f8c4ff');
-    // });
+    $('.letsPlay, #play-again').attr('disabled', true).addClass('disable');
 }
 
 // wait for DOM to be ready

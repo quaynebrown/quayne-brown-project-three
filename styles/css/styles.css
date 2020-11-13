@@ -246,6 +246,28 @@ button {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 100%;
           flex: 1 0 100%;
+  text-transform: capitalize;
+}
+
+a {
+  color: inherit;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #f96900;
+  text-decoration: underline;
+}
+
+footer {
+  background-color: #F5F5F5;
+  text-align: center;
+  padding: 3px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: auto;
 }
 
 .err-container {
@@ -282,6 +304,24 @@ button {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+}
+
+.new-game-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.new-game-container button {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 48%;
+          flex: 0 1 48%;
 }
 
 .result-container {

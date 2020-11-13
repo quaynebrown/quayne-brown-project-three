@@ -22,17 +22,17 @@
             <!-- section-1 start -->
             <section id="form-1-container" class="form-1-container">
                 <!-- form-1 start -->
-                <form name="form-1"action="#">
+                <form id="form-1" name="form-1" action="#">
                     <div class="input-container">
                         <label for="user-word">Enter word #<span class="word-count"></span>:</label>
-                        <input type="text" name="user-word" id="user-word" placeholder="Enter word here" required>
+                        <input type="text" name="user-word" autocomplete="off" id="user-word" placeholder="Enter word here" required>
                     </div>
                     <div class="err-container">
-                        
+                        <!--  -->
                     </div>          
                     <div>
                         <div class="buttons-container">
-                            <button type="button" class="add-word">Add word</button>
+                            <button type="submit" class="add-word">Add word</button>
                             <button type="button" class="letsPlay">Let's Play!</button>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
 
                 <div class="words-container">
                     <div class="word-count-container">
-                        <h2>Your words</h3>
+                        <h2>Your words</h2>
                         <p class="word-index"></p>
                     </div>
                     <ul class="words">
@@ -64,7 +64,10 @@
                     </ul>
                     <div class="buttons-container">
                         <button id="answer-submit" type="submit">Submit your answers</button>
-                        <button id="play-again" type="button">Play again!</button>
+                        <!-- <div class="new-game-container"> -->
+                            <button id="play-again" type="button">Play again</button>
+                            <!-- <button id="new-game" type="button">New game</button> -->
+                        <!-- </div> -->
                     </div>
                 </form>
                 <!-- form-2 end -->
@@ -73,6 +76,16 @@
         </div>
     </main>
     <!-- main end -->
+
+    <!-- footer start -->
+    <footer>
+        <div class="wrapper">
+            <p>
+                Copyright &copy; 2020. <a href="https://junocollege.com/">Created at Juno College</a> by Quayne Brown.
+            </p>
+        </div>
+    </footer>
+    <!-- footer end -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="./scripts/app.js"></script>
 </body>
