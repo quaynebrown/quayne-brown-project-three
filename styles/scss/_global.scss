@@ -183,12 +183,13 @@ footer{
     margin-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+
     .word-count-container{
         display: flex;
         justify-content: space-between;
         h2{
             margin: 20px 0 0 0;
-        }
+        }        
 
         p{
             width: 40px;
@@ -205,6 +206,7 @@ footer{
     }
     li{
         display: flex;
+        flex-direction: row-reverse;
         justify-content: space-between;
         font-weight: 600;
     }

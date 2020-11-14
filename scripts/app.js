@@ -37,6 +37,7 @@
 const spellingApp = {};
 spellingApp.words = [];
 spellingApp.scrambledWords = [];
+spellingApp.faIdCount = 0;
 
 // take a word and shuffles the characters
 spellingApp.shuffleLetters =  (word) => {
@@ -106,12 +107,18 @@ spellingApp.swapForms2nd = () => {
     $('#form-2-container').addClass('show-section');
 }
 
+$('.words').on('click', '.fa-minus-circle', function() {
+    const wordToDelete = $(this).siblings('p').text();
+    const indexToDelete = spellingApp.words.findIndex((element) => {
+        return element.toLowerCase() == wordToDelete.toLowerCase();
+    });
+    spellingApp.words.splice(indexToDelete, 1);
+    $(this).parent().empty();
+})
+
 // new game
 $('#new-game').on('click', function() {
     spellingApp.resetGame();
-    
-
-    // spellingApp.init();
 });
 
 // play again
@@ -201,8 +208,8 @@ $('#form-1').on('submit', function(e){
     
         const newWord = `
         <li>
+            <i id="fa${++spellingApp.faIdCount}" class="fas fa-minus-circle"></i>
             <p>${word}</p> 
-            <i class="fas fa-minus-circle"></i>
         </li>`;
     
         // print a list of all the words entered
