@@ -74,28 +74,45 @@ spellingApp.generateListItems = (word, index) => {
 }
 
 // calculate and return the percentage of correct answers
-spellingApp.calculatePercentage = (correctAnswers) => {
-    const result = (correctAnswers / spellingApp.words.length) * 100;
+spellingApp.calculatePercentage = (correctAnswers = 0) => {
+    const result = correctAnswers !== 0 ? (correctAnswers / spellingApp.words.length) * 100 : 0;
     return result.toFixed(2);
 }
 
 spellingApp.resetGame = () => {
     spellingApp.words = [];
     spellingApp.scrambledWords = [];
-
+    spellingApp.displayResult(0);
+    spellingApp.swapForms1st();
+    spellingApp.setWordCount();
+    $('.words').empty();
 }
 
-// spellingApp.displayResult(){
-//     // display result
-//     $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`);
-//     $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount) +'%');
-// }
+spellingApp.displayResult = (correctAnswersCount) => {
+    // display result
+    $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`);
+    $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount) +'%');
+}
+
+// Display forms to display the initial form for the user to enter new words
+spellingApp.swapForms1st = () => {
+    $('#form-1-container').removeClass('hide-section');
+    $('#form-2-container').removeClass('show-section');
+}
+
+// Display forms to display the the second form for the user to spell their words to be compared
+spellingApp.swapForms2nd = () => {
+    $('#form-1-container').addClass('hide-section');
+    $('#form-2-container').addClass('show-section');
+}
 
 // new game
 $('#new-game').on('click', function() {
     spellingApp.resetGame();
-    spellingApp.init();
-})
+    
+
+    // spellingApp.init();
+});
 
 // play again
 $('#play-again').on('click', function() {
@@ -106,7 +123,6 @@ $('#play-again').on('click', function() {
 
         //remove class from all input
         $(this).removeClass('wrongAnswer correctAnswer').attr('disabled', false);
-
     });
 
     $('#play-again').attr('disabled', true).addClass('disable');
@@ -114,7 +130,7 @@ $('#play-again').on('click', function() {
     //reset calculation
     $('.result span').text(`0/${spellingApp.words.length}`)
     $('.result-percentage span').text('0.00%')
-})
+});
 
 // Add event listener for when the user click 'Submit your answers'
 $('#form-2').on('submit', function(e){
@@ -145,8 +161,7 @@ $('#form-2').on('submit', function(e){
     $('#play-again').attr('disabled', false).removeClass('disable');
 
     // display result
-    $('.result span').text(`${correctAnswersCount}/${spellingApp.words.length}`);
-    $('.result-percentage span').text(spellingApp.calculatePercentage(correctAnswersCount) +'%');
+    spellingApp.displayResult(correctAnswersCount);
 })
 
 // 2. Add event listener for when the user click 'Submit & Play!'
@@ -163,14 +178,11 @@ $('.letsPlay').on('click', function(e){
     });
 
     // Take the user to a new page to unscramble the words
-    $('#form-1-container').addClass('hide-section');
-    $('#form-2-container').addClass('show-section');
+    spellingApp.swapForms2nd();
     
-
     spellingApp.scrambledWords.forEach((wordSet, index) => {
         spellingApp.generateListItems(wordSet.scrambledWord, index);
     })
-
 });
     
 // caching selectors   
@@ -219,6 +231,7 @@ spellingApp.setWordCount = () => {
 spellingApp.init = function (){
     spellingApp.setWordCount() ;
     $('.letsPlay, #play-again').attr('disabled', true).addClass('disable');
+    // $('#form-2-container').addClass('show-section');
 }
 
 // wait for DOM to be ready
