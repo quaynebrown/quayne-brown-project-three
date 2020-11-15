@@ -152,7 +152,7 @@ $('#form-2').on('submit', function(e){
     let index = 0;
 
     $('.unscrambled-word').each(function (){
-        const unscrambledWord = $(this).val().toLowerCase();
+        const unscrambledWord = $(this).val().toLowerCase().trim();
 
         $(this).attr('disabled', true);
         // compare the user's input with the words that are in the original array
