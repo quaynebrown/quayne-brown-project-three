@@ -60,6 +60,11 @@ input{
     background-color: $light-color;
 }
 
+input:active,
+input:focus{
+    border: 2px solid $primary-accent;
+}
+
 input,
 button{
     border: none;
@@ -243,6 +248,10 @@ footer{
     button:hover,
     button:focus{
         background-color: $primary-accent;
+    }
+
+    input:hover{
+        border: 2px solid $primary-accent;
     }
 
     a:hover,

@@ -222,6 +222,11 @@ input {
   background-color: #F5F5F5;
 }
 
+input:active,
+input:focus {
+  border: 2px solid #f96900;
+}
+
 input,
 button {
   border: none;
@@ -439,6 +444,9 @@ footer {
   button:hover,
   button:focus {
     background-color: #f96900;
+  }
+  input:hover {
+    border: 2px solid #f96900;
   }
   a:hover,
   a:focus {
