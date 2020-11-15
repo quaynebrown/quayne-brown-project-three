@@ -23,6 +23,10 @@
             <section id="form-1-container" class="form-1-container">
                 <!-- form-1 start -->
                 <form id="form-1" name="form-1" action="#">
+                    <div class="form-header">
+                        <h2>Instruction</h2>
+                        <p>Please enter all the words that you wish to spell then press <em>"Let's Play!"</em></p>
+                    </div>
                     <div class="input-container">
                         <label for="user-word">Enter word #<span class="word-count"></span>:</label>
                         <input type="text" name="user-word" autocomplete="off" id="user-word" placeholder="Enter word here" required>
@@ -52,13 +56,16 @@
             <!-- section-1 end -->
 
             <!-- section-2 start -->
-            <section id="form-2-container" class="form-2-container hide-section">
+            <section id="form-2-container" aria-hidden="true" class="form-2-container hide-section">
                 <div class="result-container">
                     <p class="result">Result: <span></span></p>
                     <p class="result-percentage">Percentage: <span></span></p>
                 </div>
                 <!-- form-2 start -->
                 <form id="form-2" name="form-2" action="#">
+                    <div class="form-header">
+                        <h2>Please unscramble your words</h2>
+                    </div>
                     <ul id="scrambledWords">
                         
                     </ul>

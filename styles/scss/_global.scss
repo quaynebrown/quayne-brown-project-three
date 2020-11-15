@@ -81,20 +81,12 @@ a{
     text-decoration: none;
 }
 
-a:hover{
-    color: $primary-accent;
-    text-decoration: underline;
-}
 
 footer{
-    background-color: $light-color;
+    color: $light-color;
     text-align: center;
     padding: 3px;
-    margin-top: 20px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    left: auto;
+    margin-top: 50px;
 }
 
 .err-container{
@@ -110,6 +102,20 @@ footer{
     width: 95%;
     max-width: 700px;
     margin: 0 auto;
+}
+
+.form-header{
+    text-align: center;
+    border-bottom: 2px solid $primary-accent;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    h2{
+        margin: 0;
+    }
+
+    p{
+        margin-bottom: 0;
+    }
 }
 
 .input-container{
@@ -150,7 +156,7 @@ footer{
     }
 }
 
-.hide-section{
+.hide-section {
     visibility: hidden;
     height: 0;
 }
@@ -217,8 +223,8 @@ footer{
         padding-left: 20px;
     }
     
-    li:nth-child(odd) {
-        background-color: $primary-accent;
+    .list-item {
+        border-bottom:1px dotted $primary-accent;
     }
 
     i{
@@ -237,5 +243,11 @@ footer{
     button:hover,
     button:focus{
         background-color: $primary-accent;
+    }
+
+    a:hover,
+    a:focus{
+        color: $primary-accent;
+        text-decoration: underline;
     }
 }

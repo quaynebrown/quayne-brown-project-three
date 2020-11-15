@@ -67,7 +67,7 @@ spellingApp.generateListItems = (word, index) => {
     const listItem = `
         <li class="word-container input-container">
             <label for="shuffle-${index}">${word}</label>
-            <input type="text" autocomplete="off" class="unscrambled-word" id="shuffle-${index}" placeholder="spell your word">
+            <input type="text" autocomplete="off" class="unscrambled-word" id="shuffle-${index}" placeholder="spell your word" required>
         </li>
     `
 
@@ -87,6 +87,7 @@ spellingApp.resetGame = () => {
     spellingApp.swapForms1st();
     spellingApp.setWordCount();
     $('.words').empty();
+    $('#scrambledWords').empty();
 }
 
 spellingApp.displayResult = (correctAnswersCount) => {
@@ -97,14 +98,18 @@ spellingApp.displayResult = (correctAnswersCount) => {
 
 // Display forms to display the initial form for the user to enter new words
 spellingApp.swapForms1st = () => {
-    $('#form-1-container').removeClass('hide-section');
-    $('#form-2-container').removeClass('show-section');
+    $('#form-1-container').removeClass('hide-section')
+    .attr('aria-hidden', true);
+    $('#form-2-container').removeClass('show-section')
+    .attr('aria-hidden', false);
 }
 
 // Display forms to display the the second form for the user to spell their words to be compared
 spellingApp.swapForms2nd = () => {
-    $('#form-1-container').addClass('hide-section');
-    $('#form-2-container').addClass('show-section');
+    $('#form-1-container').addClass('hide-section')
+    .attr('aria-hidden', true);
+    $('#form-2-container').addClass('show-section')
+    .attr('aria-hidden', false);
 }
 
 $('.words').on('click', '.fa-minus-circle', function() {
@@ -113,7 +118,8 @@ $('.words').on('click', '.fa-minus-circle', function() {
         return element.toLowerCase() == wordToDelete.toLowerCase();
     });
     spellingApp.words.splice(indexToDelete, 1);
-    $(this).parent().empty();
+    spellingApp.setWordCount();
+    $(this).parent().removeClass('list-item').empty();
 })
 
 // new game
@@ -207,7 +213,7 @@ $('#form-1').on('submit', function(e){
         spellingApp.words.push(word.toLowerCase());
     
         const newWord = `
-        <li>
+        <li class="list-item">
             <i id="fa${++spellingApp.faIdCount}" class="fas fa-minus-circle"></i>
             <p>${word}</p> 
         </li>`;
