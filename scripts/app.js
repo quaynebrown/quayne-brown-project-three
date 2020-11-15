@@ -207,7 +207,7 @@ $('#form-1').on('submit', function(e){
     e.preventDefault();
     $('.err-container').empty();
 
-    const word = $userInput.val();
+    const word = $userInput.val().trim();
     if(word !== ''){
         // push each word to a words array
         spellingApp.words.push(word.toLowerCase());
