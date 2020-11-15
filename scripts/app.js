@@ -1,22 +1,3 @@
-// pseudoCode
-// 1. Add event listener for when the user click 'add word'
-    // push each word to a words array
-    // display the words on the screen for the user to see
-    // display the total number of words entered
-    // clear the input field and add focus
-
-// 2. Add event listener for when the user click 'Submit & Play!'
-    // scramble the words and store in a new array
-    // Take the user to a new page to unscramble the words
-    // generate a list of inputs for the user to unscramble their words
-    
-// 3. Add event listener for when the user click 'Submit your answers'
-    // compare the user's input with the words that are in the original array
-    // Calculate how much they got right
-    // calculate the percentage
-    // display result
-        
-
 const spellingApp = {};
 spellingApp.words = [];
 spellingApp.scrambledWords = [];
@@ -179,7 +160,6 @@ $('#form-2').on('submit', function(e){
         index++;
     });
 
-    // $('#answer-submit').attr('disabled', true).addClass('disable');
     $('#play-again').attr('disabled', false).removeClass('disable');
 
     // display result
